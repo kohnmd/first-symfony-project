@@ -36,4 +36,19 @@ class LuckyController extends Controller
         return new JsonResponse($data);
     }
 
+    /**
+     * @Route("/api/lucky/numbers/{count}")
+     *
+     * @param $count int
+     */
+    public function apiNumbersAction($count)
+    {
+        $numbers = array();
+        for ($i = 0; $i < $count; $i++) {
+            $numbers[] = rand(0, 100);
+        }
+
+        return new JsonResponse($numbers);
+    }
+
 }
