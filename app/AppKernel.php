@@ -33,4 +33,34 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
+
+    /**
+     * Custom cache dir if dev/test environment to improve vagrant performance.
+     *
+     * @return string
+     */
+    public function getCacheDir()
+    {
+        if (in_array($this->environment, array('dev', 'test'))) {
+            return '/dev/shm/appname/cache/' .  $this->environment;
+        }
+
+        return parent::getCacheDir();
+    }
+
+    /**
+     * Custom cache dir if dev/test environment to improve vagrant performance.
+     *
+     * @return string
+     */
+    public function getLogDir()
+    {
+        if (in_array($this->environment, array('dev', 'test'))) {
+            return '/dev/shm/appname/logs';
+        }
+
+        return parent::getLogDir();
+    }
+
+
 }
